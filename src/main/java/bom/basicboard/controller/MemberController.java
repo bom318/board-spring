@@ -8,11 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import bom.basicboard.domain.Member;
-import bom.basicboard.repository.MemberRepository;
 import bom.basicboard.service.MemberService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -51,18 +51,19 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String join(@Validated@RequestParam("memberId") String memberId, 
-                        @Validated@RequestParam String password,
-                        @RequestParam String memberName, BindingResult bindingResult) {
+    public String join(@Validated@ModelAttribute Member member,
+                        BindingResult bindingResult) {
         
         //서버 유효성 검사
         if(bindingResult.hasErrors()) {
             log.info("errors={}",bindingResult);
             return "join";
         }
+        //비밀번호 암호화
+        
 
-        Member member = new Member(memberId, password, memberName);
-        memberService.join(member);
+        Member result = new Member(member.getMemberId(), member.getPassword(), member.getMemberName());
+        memberService.join(result);
 
         return "redirect:/";
     }

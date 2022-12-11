@@ -13,7 +13,7 @@ public class Member {
 
     @NotBlank(message="필수 입력 항목입니다")
     @Pattern(regexp = "^[a-zA-Z][0-9a-zA-Z]{7,}$")
-    private String memberId;
+        private String memberId;
     @NotBlank(message="필수 입력 항목입니다")
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{7,}$")
     private String password;
