@@ -1,23 +1,36 @@
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
+    <script src="/src/join.js" defer></script>
     <link rel="stylesheet" href="/css/join.css">
 </head>
+
 <body>
     <h2>BOM BOARD</h2>
     <section>
-            <form action="/join" method="post">
+        <form action="/join" method="post">
+            <div>
                 <input type="text" name="memberId" id="memberId" placeholder="사용하실 ID를 입력해주세요">
+                <span class="check" id="checkId"></span>
+            </div>
+            <div>
                 <input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요">
+                <span class="check" id="checkPassword"></span>
+            </div>
+            <div>
                 <input type="text" name="memberName" id="memberName" placeholder="이름을 입력해주세요">
-                <input type="submit" value="가입" class="btn">
-                
-            </form>
+            </div>
+
+            <input type="submit" value="가입" class="btn" id="submit_btn">
+
+        </form>
         <a href="/" class="btn">돌아가기</a>
-        
+
     </section>
-    
+
 </body>
+
 </html>

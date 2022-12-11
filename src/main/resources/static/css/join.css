@@ -13,7 +13,11 @@ section {
     justify-content: center;
     flex-direction: column;
 }
+div {
+    margin-top: 50px;
+}
 input {
+    outline: none;
     display: block;
     background-color: rgb(250, 241, 241);
     border: none;
@@ -22,7 +26,6 @@ input {
     height: 50px;
     font-size: 20px;
     text-align: center;
-    margin: 50px 0;
 }
 .btn {
     background-color: blanchedalmond;
@@ -31,7 +34,7 @@ input {
     height: 50px;
     border-radius: 10px;
     font-size: 20px;
-    margin: 20px 0;
+    margin-top: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,6 +42,10 @@ input {
 .btn:hover {
     background-color: beige;
     cursor: pointer;
+}
+.check {
+    color: red;
+    font-size: 10px;
 }
 a {
     text-decoration: none;
