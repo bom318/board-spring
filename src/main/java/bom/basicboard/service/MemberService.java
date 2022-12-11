@@ -21,6 +21,10 @@ public class MemberService {
 
 
     public void join(Member member) {
+        //만약 이름 입력 안하면 이름에 아이디 저장
+        if(member.getMemberName() == null || member.getMemberName() == "") {
+            member.setMemberName(member.getMemberId());
+        }
         memberRepository.save(member);
     }
     public Member updateMember(Member member, String password, String memberName) {
