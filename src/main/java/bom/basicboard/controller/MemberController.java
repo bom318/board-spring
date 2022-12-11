@@ -1,5 +1,8 @@
 package bom.basicboard.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +23,24 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping
-    public String home() {
-        return "index";
+    public String login() {
+        return "login";
+    }
+    
+    @PostMapping("/login")
+    public String login(@RequestParam String memberId, @RequestParam String password, Model model, HttpServletRequest request) {
+
+        Member loginMember = memberService.login(memberId, password);
+        if(loginMember == null) {
+            return "login";
+        }
+
+        //세션
+        HttpSession session = request.getSession();
+        session.setAttribute("loginMember", loginMember);
+
+        model.addAttribute("member", loginMember);
+        return "redirect:/board";
     }
 
     @GetMapping("/join")
@@ -37,18 +56,8 @@ public class MemberController {
         Member member = new Member(memberId, password, memberName);
         memberService.join(member);
 
-        return "index";
+        return "redirect:/";
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam String memberId, @RequestParam String password, Model model) {
-
-        Member loginMember = memberService.login(memberId, password);
-        if(loginMember == null) {
-            return "";
-        }
-        model.addAttribute("member", loginMember);
-        return "board";
-    }
 
 }

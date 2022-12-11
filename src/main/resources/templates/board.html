@@ -5,14 +5,15 @@
     <meta name="author" content="BOMI">
     <meta name="description" content="스프링 기본 게시판">
 
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/login.css">
     <title>게시판</title>
 </head>
 <body>
     <h2>BOM BOARD</h2>
         <p th:text="|안녕하세요, ${member.memberName}님!|">안녕하세요, 회원님!</p>
-
-    
+        <form action="/log-out" method="post">
+            <button type="submit"> 로그아웃</button>
+        </form>
     
     
 </body>
