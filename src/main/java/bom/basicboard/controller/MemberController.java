@@ -5,6 +5,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,9 +51,15 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String join(@RequestParam("memberId") String memberId, 
-                        @RequestParam String password,
-                        @RequestParam String memberName) {
+    public String join(@Validated@RequestParam("memberId") String memberId, 
+                        @Validated@RequestParam String password,
+                        @RequestParam String memberName, BindingResult bindingResult) {
+        
+        //서버 유효성 검사
+        if(bindingResult.hasErrors()) {
+            log.info("errors={}",bindingResult);
+            return "join";
+        }
 
         Member member = new Member(memberId, password, memberName);
         memberService.join(member);
