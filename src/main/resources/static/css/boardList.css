@@ -7,11 +7,6 @@ h2 {
 section {
     width: 70%;
     margin: auto;
-    /* text-align: center; */
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
-    /* flex-direction: column; */
 }
 .welcome {
     display: flex;

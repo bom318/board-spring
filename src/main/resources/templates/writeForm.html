@@ -1,0 +1,54 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="BOMI">
+    <meta name="description" content="스프링 기본 게시판">
+
+    <script src="https://kit.fontawesome.com/8d62fb13e2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/css/writeForm.css">
+    <script src="../static/src/writeForm.js"></script>
+    <title>게시판</title>
+</head>
+
+<body>
+    <h2>BOM BOARD</h2>
+    <section class="welcome">
+        <p th:text="|안녕하세요, ${member.memberName}님!|" class="welcome-text">안녕하세요, 회원님!</p>
+        <form action="/log-out" method="post" class="logout">
+            <button type="submit" class="logout_btn"> 로그아웃</button>
+        </form>
+    </section>
+
+    <section class="board">
+        <form action="/write" method="post" class="board_form">
+            <label for="boardTitle">제목</label>
+            <input type="text" name="boardTitle" id="boardTitle" class="boardTitle">
+            <div class="flexBox">
+                <div class="writerBox">
+                    <label for="writer">작성자</label>
+                    <input type="text" name="writer" id="writer" value="미역" disabled class="writer">
+                </div>
+                <div class="dateBox">
+                    <label for="date">작성일</label>
+                    <input type="text" name="date" id="date" disabled class="date" value="2022.12.12">
+                </div>
+
+            </div>
+
+            <div class="fileBox">
+                <input class="upload-name" disabled>
+                <label for="file">파일찾기</label>
+                <input type="file" id="file">
+            </div>
+            <label for="boardContent">내용</label>
+            <textarea name="boardContent" id="boardContent" cols="30" rows="10"></textarea>
+            <button type="submit">글쓰기</button>
+        </form>
+    </section>
+
+
+</body>
+
+</html>
