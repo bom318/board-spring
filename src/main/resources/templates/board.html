@@ -21,29 +21,29 @@
     </section>
 
     <section class="board-top">
-        <form action="seach" method="post">
+        <form action="seach" method="post" class="board-form">
             <select name="filter" id="search-filter">
                 <option value="title">제목</option>
                 <option value="name">작성자</option>
             </select>
             <input type="text" name="word">
-            <button type="submit">
+            <button type="submit" class="submit_btn">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </form>
 
-        <button><a href="/write">글쓰기</a></button>
+        <button class="write"><a href="/write" class="write-btn">글쓰기</a></button>
     </section>
     <section class="board_list">
-        <div class="board">
+        <div class="board board-name">
             <span class="boardNum">글번호</span>
             <span class="boardTitle">제목</span>
             <span class="boardWriter">작성자</span>
             <span class="boardDate">등록일</span>
         </div>
-        <div>
+        <div class="board board-items">
             <span class="boardNum">1</span>
-            <span class="boardTitle">안녕하세요
+            <span class="boardTitle"><a href="#">안녕하세요</a>
                 <span class="boardRenum">2</span>
             </span>
             <span class="boardWriter">보미</span>

@@ -17,10 +17,18 @@ section {
     display: flex;
     align-items: center;
 }
+.welcome-text {
+    font-weight: 600;
+}
+.logout {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
 .logout_btn {
     background-color: blanchedalmond;
     border: none;
-    padding: 10px;
+    padding: 5px;
     font-weight: 600;
     border-radius: 10px;
     margin-left: 20px;
@@ -30,6 +38,24 @@ section {
     background-color: antiquewhite;
     color: gray;
 }
+.board-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.board-form {
+    display: flex;
+    margin: 0;
+}
+
+#search-filter {
+    outline: none;
+    width: 100px;
+    text-align: center;
+    margin-right: 10px;
+    border-radius: 10px;
+    font-weight: 600;
+}
 
 input {
     outline: none;
@@ -37,8 +63,78 @@ input {
     background-color: rgb(250, 241, 241);
     border: none;
     border-radius: 10px;
-    width: 100%;
-    height: 50px;
+    width: 200px;
+    height: 40px;
     font-size: 20px;
     text-align: center;
+    margin-right: 10px;
+}
+.submit_btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+.write {
+    background-color: blanchedalmond;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+}
+.write:hover {
+    background-color: antiquewhite;
+    color: gray;
+}
+.write-btn {
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+}
+.board_list {
+    margin-top: 20px;
+}
+.board {
+    display: flex;
+    text-align: center;
+}
+.board-name span{
+    background-color: aquamarine;
+    margin: 3px;
+    padding: 2px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.board-items span {
+    background-color: rgb(255, 241, 241);
+    margin: 3px;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.boardNum {
+    width: 10%;
+    
+}
+.boardTitle {
+    width: 60%;
+}
+.boardTitle a {
+    text-decoration: none;
+    color: black;
+}
+.boardRenum {
+    background-color: aquamarine !important;
+    border-radius: 100px;
+    padding: 5px;
+    display: inline-block;
+    width: 23px;
+}
+.boardWriter {
+    width: 15%;
+}
+.boardDate {
+    width: 15%;
 }
