@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.stereotype.Repository;
 
 import bom.basicboard.domain.Board;
@@ -105,6 +107,15 @@ public class MemoryBoardRepository implements BoardRepository {
     public void clearStore() {
         boardStore.clear();
         reStore.clear();
+    }
+
+
+    // init 데이터
+    @PostConstruct
+    public void init() {
+        write(new Board("hi", "bom", "하이루"));
+        write(new Board("안녕하세여", "미역", "귀여웡"));
+        writeRe(1L, new Rewrite("2222", "미역"));
     }
 
 }

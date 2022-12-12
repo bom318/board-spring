@@ -21,8 +21,8 @@ public class BoardService {
     }
 
     
-    public Optional<List<Board>> getBoardList() {
-        return boardRepository.findAll();
+    public List<Board> getBoardList() {
+        return boardRepository.findAll().get();
     }
 
     public Board getBoard(Long boardNum) {
@@ -37,9 +37,9 @@ public class BoardService {
         return boardRepository.update(boardNum, board);
     }
 
-    public Optional<List<Board>> deleteBoard(Long boardNum) {
+    public List<Board> deleteBoard(Long boardNum) {
         boardRepository.delete(boardNum);
-        return boardRepository.findAll();
+        return boardRepository.findAll().get();
     }
 
     // 댓글

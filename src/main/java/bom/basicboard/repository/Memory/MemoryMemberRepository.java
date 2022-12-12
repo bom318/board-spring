@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.stereotype.Repository;
 
 import bom.basicboard.domain.Member;
@@ -60,6 +62,11 @@ public class MemoryMemberRepository implements MemberRepository{
 
     public void clear() {
         store.clear();
+    }
+
+    @PostConstruct
+    public void init() {
+        save(new Member("qweqweqwe", "qwe123!@#", "보미"));
     }
     
 }

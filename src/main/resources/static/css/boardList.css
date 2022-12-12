@@ -106,8 +106,9 @@ input {
     align-items: center;
     justify-content: center;
 }
-.board-items span {
+.board_span {
     background-color: rgb(255, 241, 241);
+    height:35px;
     margin: 3px;
     padding: 2px;
     display: flex;
@@ -129,8 +130,12 @@ input {
     background-color: aquamarine !important;
     border-radius: 100px;
     padding: 5px;
-    display: inline-block;
-    width: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    margin-left: 8px;
 }
 .boardWriter {
     width: 15%;

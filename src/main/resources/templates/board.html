@@ -7,7 +7,7 @@
     <meta name="description" content="스프링 기본 게시판">
 
     <script src="https://kit.fontawesome.com/8d62fb13e2.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../static/css/boardList.css">
+    <link rel="stylesheet" href="/css/boardList.css">
     <title>게시판</title>
 </head>
 
@@ -41,13 +41,13 @@
             <span class="boardWriter">작성자</span>
             <span class="boardDate">등록일</span>
         </div>
-        <div class="board board-items">
-            <span class="boardNum">1</span>
-            <span class="boardTitle"><a href="#">안녕하세요</a>
-                <span class="boardRenum">2</span>
+        <div class="board board-items" th:each="board: ${boardList}">
+            <span class="boardNum board_span" th:text="${board.boardNum}">1</span>
+            <span class="boardTitle board_span"><a href="#" th:text="${board.boardTitle}">안녕하세요</a>
+                <span class="boardRenum" th:if="${board.reples != null}" th:text="${board.reples.size()}">2</span>
             </span>
-            <span class="boardWriter">보미</span>
-            <span class="boardDate">2022.12.11</span>
+            <span class="boardWriter board_span" th:text="${board.writer}">보미</span>
+            <span class="boardDate board_span" th:text="${board.date}">2022.12.11</span>
         </div>
     </section>
 
