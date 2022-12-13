@@ -7,7 +7,7 @@
     <meta name="description" content="스프링 기본 게시판">
 
     <script src="https://kit.fontawesome.com/8d62fb13e2.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../static/css/boardDetail.css">
+    <link rel="stylesheet" href="/css/boardDetail.css">
     <title>게시판</title>
 </head>
 
@@ -23,30 +23,35 @@
     <section class="board">
         <form action="" method="post" class="board_form">
             <label for="boardTitle">제목</label>
-            <input type="text" name="boardTitle" id="boardTitle" class="boardTitle" 
-            th:value="${board.boardTitle" value="안녕하세요" readonly>
+            <input type="text" name="boardTitle" id="boardTitle" class="boardTitle" th:value="${board.boardTitle}"
+                value="안녕하세요" readonly>
             <div class="flexBox">
                 <div class="writerBox">
                     <label for="writer">작성자</label>
                     <input type="text" name="writer" id="writer" value="미역" readonly class="writer"
-                    th:value="${board.writer}">
+                        th:value="${board.writer}">
                 </div>
                 <div class="dateBox">
                     <label for="date">작성일</label>
                     <input type="text" name="date" id="date" readonly class="date" value="2022.12.12"
-                    th:value="${board.date}">
+                        th:value="${board.date}">
                 </div>
 
             </div>
-            <input type="file" id="file" multiple readonly>
+            <label for="files">첨부파일</label>
+            <a href="" th:each="file : ${board.files}" th:text="${file.getUploadFileName()}"></a>
 
             <label for="boardContent">내용</label>
             <textarea name="boardContent" id="boardContent" cols="30" rows="10" readonly
-            th:value="${board.boardContent}">반갑습니다</textarea>
-            <button th:if="${board.writer==member.memberName}" class="write_btn">수정하기</button>
-            <button href="/board" class="write_btn">돌아가기</button>
+                th:value="${board.content}">반갑습니다</textarea>
+
         </form>
-        
+        <div class="btns">
+            <a th:if="${board.writer==member.memberName}" class="write_btn">수정하기</a>
+            <a href="/board" class="write_btn">돌아가기</a>
+        </div>
+
+
     </section>
 
 

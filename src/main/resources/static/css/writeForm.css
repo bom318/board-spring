@@ -47,7 +47,7 @@ section {
     width: 30%;
     margin-right: 70px;
 }
-#file::file-selector-button {
+#files::file-selector-button {
     padding: 0 20px;
     color: #fff;
     align-items: center;

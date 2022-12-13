@@ -4,6 +4,10 @@ h2 {
     background-color: aquamarine;
     border-radius: 20px;
 }
+a {
+    text-decoration: none;
+    color: black;
+}
 
 .welcome {
     display: flex;
@@ -73,7 +77,7 @@ section {
     width: 30%;
     margin-right: 70px;
 }
-#file::file-selector-button {
+#files::file-selector-button {
     padding: 0 20px;
     color: #fff;
     align-items: center;
@@ -94,6 +98,10 @@ section {
     outline: none;
     padding: 10px;
 }
+.btns {
+    display: flex;
+    flex-direction: column;
+}
 .write_btn {
     background-color: blanchedalmond;
     border: none;
@@ -103,6 +111,9 @@ section {
     margin-top: 30px;
     cursor: pointer;
     height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .write_btn:hover {
     background-color: antiquewhite;

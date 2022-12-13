@@ -19,7 +19,7 @@
     </section>
 
     <section class="board">
-        <form action="/write" method="post" class="board_form">
+        <form action="/write" method="post" class="board_form" enctype="multipart/form-data">
             <label for="boardTitle">제목</label>
             <input type="text" name="boardTitle" id="boardTitle" class="boardTitle">
             <div class="flexBox">
@@ -35,7 +35,7 @@
                 </div>
 
             </div>
-            <input type="file" id="file" multiple>
+            <input type="file" id="files" name="files" multiple="multiple">
 
             <label for="boardContent">내용</label>
             <textarea name="boardContent" id="boardContent" cols="30" rows="10"></textarea>

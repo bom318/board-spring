@@ -12,8 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Board {
-    
+public class BoardForm {
     @NotBlank
     private Long boardNum;
     @NotBlank
@@ -25,17 +24,7 @@ public class Board {
     @NotBlank
     private String content;
 
-    private HashMap<Long, Rewrite> reples;
-    private List<File> files;
-
-    public Board() {
-    }
-
-    public Board(String boardTitle, String writer, String content) {
-        this.boardTitle = boardTitle;
-        this.writer = writer;
-        this.content = content;
-    }
+    private List<MultipartFile> files;
     
-    
+
 }
