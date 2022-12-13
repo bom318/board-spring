@@ -7,7 +7,7 @@
     <meta name="description" content="스프링 기본 게시판">
 
     <script src="https://kit.fontawesome.com/8d62fb13e2.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../static/css/writeForm.css">
+    <link rel="stylesheet" href="/css/writeForm.css">
     <script src="../static/src/writeForm.js"></script>
     <title>게시판</title>
 </head>
@@ -25,11 +25,13 @@
             <div class="flexBox">
                 <div class="writerBox">
                     <label for="writer">작성자</label>
-                    <input type="text" name="writer" id="writer" value="미역" readonly class="writer">
+                    <input type="text" name="writer" id="writer" value="미역" readonly class="writer"
+                    th:value="${member.memberName}">
                 </div>
                 <div class="dateBox">
                     <label for="date">작성일</label>
-                    <input type="text" name="date" id="date" readonly class="date" value="2022.12.12">
+                    <input type="text" name="date" id="date" readonly class="date" value="2022.12.12"
+                    th:value="${date}">
                 </div>
 
             </div>

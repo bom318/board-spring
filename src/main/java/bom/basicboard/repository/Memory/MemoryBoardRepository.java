@@ -44,7 +44,6 @@ public class MemoryBoardRepository implements BoardRepository {
 
         // 파일
 
-        board.setDate(dateFormat.format(date));
         board.setBoardNum(++boardId);
         boardStore.put(board.getBoardNum(), board);
 
