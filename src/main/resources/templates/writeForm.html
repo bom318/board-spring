@@ -14,11 +14,8 @@
 
 <body>
     <h2>BOM BOARD</h2>
-    <section class="welcome">
-        <p th:text="|안녕하세요, ${member.memberName}님!|" class="welcome-text">안녕하세요, 회원님!</p>
-        <form action="/log-out" method="post" class="logout">
-            <button type="submit" class="logout_btn"> 로그아웃</button>
-        </form>
+    <section>
+        <a href="/board" class="goback">돌아가기</a>
     </section>
 
     <section class="board">
@@ -28,23 +25,19 @@
             <div class="flexBox">
                 <div class="writerBox">
                     <label for="writer">작성자</label>
-                    <input type="text" name="writer" id="writer" value="미역" disabled class="writer">
+                    <input type="text" name="writer" id="writer" value="미역" readonly class="writer">
                 </div>
                 <div class="dateBox">
                     <label for="date">작성일</label>
-                    <input type="text" name="date" id="date" disabled class="date" value="2022.12.12">
+                    <input type="text" name="date" id="date" readonly class="date" value="2022.12.12">
                 </div>
 
             </div>
+            <input type="file" id="file" multiple>
 
-            <div class="fileBox">
-                <input class="upload-name" disabled>
-                <label for="file">파일찾기</label>
-                <input type="file" id="file">
-            </div>
             <label for="boardContent">내용</label>
             <textarea name="boardContent" id="boardContent" cols="30" rows="10"></textarea>
-            <button type="submit">글쓰기</button>
+            <button type="submit" class="write_btn">글쓰기</button>
         </form>
     </section>
 

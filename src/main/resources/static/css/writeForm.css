@@ -8,28 +8,16 @@ section {
     width: 70%;
     margin: auto;
 }
-.welcome {
-    display: flex;
-    align-items: center;
-}
-.welcome-text {
-    font-weight: 600;
-}
-.logout {
-    display: flex;
-    align-items: center;
-    margin: 0;
-}
-.logout_btn {
+.goback {
     background-color: blanchedalmond;
     border: none;
-    padding: 5px;
+    padding: 10px;
     font-weight: 600;
     border-radius: 10px;
-    margin-left: 20px;
+    color: black;
+    text-decoration: none;
 }
-.logout_btn:hover {
-    cursor: pointer;
+.goback:hover {
     background-color: antiquewhite;
     color: gray;
 }
@@ -59,30 +47,38 @@ section {
     width: 30%;
     margin-right: 70px;
 }
-.filebox {
-    display: flex;
-    margin-top: 20px;
-    margin-bottom: 30px;
-}
-.upload-name {
-    height: 40px;
-    padding: 0 10px;
-    vertical-align: middle;
-    border: 1px solid #dddddd;
-    width: 78%;
-    color: #999999;
-    outline: none;
-}
-.filebox label {
-    display: flex;
+#file::file-selector-button {
     padding: 0 20px;
     color: #fff;
     align-items: center;
     background-color: #999999;
+    border: none;
     cursor: pointer;
     height: 40px;
-    margin-left: 10px;
+    margin: 20px 10px 20px 0;
 }
-.filebox input[type="file"] {
-    display: none;
+#boardContent {
+    resize: none;
+    margin: 10px 0;
+    border: none;
+    background-color: rgb(241, 239, 237);
+    border-radius: 10px;
+    height: 500px;
+    font-size: 16px;
+    outline: none;
+    padding: 10px;
+}
+.write_btn {
+    background-color: blanchedalmond;
+    border: none;
+    padding: 5px;
+    font-weight: 600;
+    border-radius: 10px;
+    margin-top: 30px;
+    cursor: pointer;
+    height: 40px;
+}
+.write_btn:hover {
+    background-color: antiquewhite;
+    color: #999999;
 }
