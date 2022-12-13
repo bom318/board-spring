@@ -1,0 +1,110 @@
+h2 {
+    font-size: 60px;
+    text-align: center;
+    background-color: aquamarine;
+    border-radius: 20px;
+}
+
+.welcome {
+    display: flex;
+    align-items: center;
+}
+.welcome-text {
+    font-weight: 600;
+}
+.logout {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+.logout_btn {
+    background-color: blanchedalmond;
+    border: none;
+    padding: 5px;
+    font-weight: 600;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+.logout_btn:hover {
+    cursor: pointer;
+    background-color: antiquewhite;
+    color: gray;
+}
+section {
+    width: 70%;
+    margin: auto;
+}
+.goback {
+    background-color: blanchedalmond;
+    border: none;
+    padding: 10px;
+    font-weight: 600;
+    border-radius: 10px;
+    color: black;
+    text-decoration: none;
+}
+.goback:hover {
+    background-color: antiquewhite;
+    color: gray;
+}
+.board_form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+.boardTitle {
+    width: 70%;
+}
+.boardTitle, .writer, .date{
+    height: 35px;
+    background-color: rgb(241, 239, 237);
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.flexBox {
+    display: flex;
+}
+.writerBox, .dateBox {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin-right: 70px;
+}
+#file::file-selector-button {
+    padding: 0 20px;
+    color: #fff;
+    align-items: center;
+    background-color: #999999;
+    border: none;
+    cursor: pointer;
+    height: 40px;
+    margin: 20px 10px 20px 0;
+}
+#boardContent {
+    resize: none;
+    margin: 10px 0;
+    border: none;
+    background-color: rgb(241, 239, 237);
+    border-radius: 10px;
+    height: 500px;
+    font-size: 16px;
+    outline: none;
+    padding: 10px;
+}
+.write_btn {
+    background-color: blanchedalmond;
+    border: none;
+    padding: 5px;
+    font-weight: 600;
+    border-radius: 10px;
+    margin-top: 30px;
+    cursor: pointer;
+    height: 40px;
+}
+.write_btn:hover {
+    background-color: antiquewhite;
+    color: #999999;
+}
