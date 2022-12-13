@@ -1,12 +1,16 @@
 package bom.basicboard.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import bom.basicboard.domain.Board;
+import bom.basicboard.domain.File;
 import bom.basicboard.domain.Rewrite;
 import bom.basicboard.repository.BoardRepository;
 
@@ -50,6 +54,16 @@ public class BoardService {
     public Board deleteRe(Long reId, Long boardNum) {
         boardRepository.deleteRe(boardNum, reId);
         return boardRepository.findOne(boardNum);
+    }
+
+    //파일
+    public HashMap<Long, File> saveFile(Long boardNum, List<MultipartFile> files) {
+        HashMap<Long, File> saveFiles = boardRepository.saveFiles(boardNum, files);
+
+        return saveFiles;
+    }
+    public File findFile(Long boardNum, Long fileId) {
+        return boardRepository.findFile(boardNum, fileId);
     }
 
 }

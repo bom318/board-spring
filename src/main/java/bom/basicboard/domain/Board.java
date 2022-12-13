@@ -26,7 +26,7 @@ public class Board {
     private String content;
 
     private HashMap<Long, Rewrite> reples;
-    private List<File> files;
+    private HashMap<Long, File> files;
 
     public Board() {
     }

@@ -1,10 +1,19 @@
 package bom.basicboard.controller;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,13 +21,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.UriUtils;
 
 import bom.basicboard.domain.Board;
 import bom.basicboard.domain.BoardForm;
 import bom.basicboard.domain.File;
 import bom.basicboard.domain.Member;
-import bom.basicboard.repository.FileStore;
 import bom.basicboard.service.BoardService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +39,7 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardController {
 
     private final BoardService boardService;
-    private final FileStore fileStore;
+
 
     @GetMapping("/board")
     public String board(@SessionAttribute(name = "loginMember", required = false) Member loginMember, Model model) {
@@ -62,7 +72,8 @@ public class BoardController {
 
     @PostMapping("/write")
     public String write(@ModelAttribute BoardForm form, RedirectAttributes redirectAttributes) {
-        List<File> files = fileStore.storeFiles(form.getBoardNum(), form.getFiles());
+        // List<File> files = fileStore.storeFiles(form.getBoardNum(), form.getFiles());
+        HashMap<Long, File> files = boardService.saveFile(form.getBoardNum(), form.getFiles());
         Board newBoard = new Board();
         newBoard.setBoardTitle(form.getBoardTitle());
         newBoard.setContent(form.getContent());
@@ -84,6 +95,23 @@ public class BoardController {
         model.addAttribute("board", board);
         model.addAttribute("member", loginMember);
         return "boardDetail";
+    }
+
+    @GetMapping("/boardDetail/{boardNum}/{fileId}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable Long boardNum, @PathVariable Long fileId)
+            throws MalformedURLException {
+        File findFile = boardService.findFile(boardNum, fileId);
+        String storeFileName = findFile.getStoreFileName();
+        String uploadFileName = findFile.getUploadFileName();
+
+        UrlResource resource = new UrlResource("file:c://boardSpringFiles/" + storeFileName);
+
+        String encodeUploadFileName = UriUtils.encode(uploadFileName, StandardCharsets.UTF_8);
+        String contentDisposition = "attachment; filename=\"" + encodeUploadFileName + "\"";
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
+                .body(resource);
     }
 
 }

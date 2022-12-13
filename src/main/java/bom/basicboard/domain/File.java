@@ -12,6 +12,8 @@ public class File {
     @NotBlank
     private Long boardNum;
     @NotBlank
+    private Long fileId;
+    @NotBlank
     private String uploadFileName;
     @NotBlank
     private String storeFileName;

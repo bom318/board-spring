@@ -1,5 +1,6 @@
 package bom.basicboard.repository.Memory;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,22 +8,37 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import bom.basicboard.domain.Board;
+import bom.basicboard.domain.File;
 import bom.basicboard.domain.Rewrite;
 import bom.basicboard.repository.BoardRepository;
+import lombok.extern.slf4j.Slf4j;
 
 @Repository
+@Slf4j
 public class MemoryBoardRepository implements BoardRepository {
 
     Map<Long, Board> boardStore = new HashMap<>();
     Map<Long, Rewrite> reStore = new HashMap<>();
+    HashMap<Long, File> fileStore = new HashMap<>();
     Long reId = 0L;
     Long boardId = 0L;
+    Long fileId = 0L;
+
+    @Value("${file.dir}")
+    private String fileDir;
+
+    public String getFullPath(String filename) {
+        return fileDir + filename;
+    }
 
     Date date = new Date();
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -103,11 +119,64 @@ public class MemoryBoardRepository implements BoardRepository {
 
     }
 
+    @Override
+    public HashMap<Long, File> saveFiles(Long boardNum, List<MultipartFile> multipartFiles) {
+
+        if (multipartFiles.isEmpty()) {
+            return null;
+        } else {
+            for (MultipartFile multipartFile : multipartFiles) {
+                String originalFilename = multipartFile.getOriginalFilename();
+                String storeFileName = createStoreFileName(originalFilename);
+
+                try {
+                    log.info("file full path={}", getFullPath(storeFileName));
+                    multipartFile.transferTo(new java.io.File(getFullPath(storeFileName)));
+                } catch (IllegalStateException e) {
+                    log.error("storeFile error={}", e);
+                } catch (IOException e) {
+                    log.error("storeFile error={}", e);
+                }finally {
+                    File savedFile = new File(boardNum, originalFilename, storeFileName);
+                    savedFile.setFileId(++fileId);
+                    fileStore.put(savedFile.getFileId(), savedFile);
+                }
+            }
+            return fileStore;
+        }
+
+    }
+
+    // uuid 이용해 저장할 파일명 생성
+    private String createStoreFileName(String originalFilename) {
+
+        String ext = extractExt(originalFilename);
+        String uuid = UUID.randomUUID().toString();
+
+        return uuid + "." + ext;
+    }
+
+    // 확장자 추출
+    private String extractExt(String originalFilename) {
+
+        int pos = originalFilename.lastIndexOf(".");
+        return originalFilename.substring(pos + 1);
+
+    }
+
+    @Override
+    public File findFile(Long boardNum, Long fileId) {
+        Board findBoard = findOne(boardNum);
+        HashMap<Long, File> files = findBoard.getFiles();
+
+        return files.get(fileId);
+
+    }
+
     public void clearStore() {
         boardStore.clear();
         reStore.clear();
     }
-
 
     // init 데이터
     @PostConstruct
