@@ -39,7 +39,10 @@
 
             </div>
             <label for="files">첨부파일</label>
-            <a href="" th:each="file : ${board.files}" th:text="${file.getUploadFileName()}"></a>
+            <span>
+                <a href="" th:each="file : ${board.files}" th:text="${file.getUploadFileName()}" class="files">첨부파일1</a>
+            </span>
+            
 
             <label for="boardContent">내용</label>
             <textarea name="boardContent" id="boardContent" cols="30" rows="10" readonly
