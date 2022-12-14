@@ -7,7 +7,7 @@
     <meta name="description" content="스프링 기본 게시판">
 
     <script src="https://kit.fontawesome.com/8d62fb13e2.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/boardList.css">
+    <link rel="stylesheet" href="../static/css/boardList.css">
     <title>게시판</title>
 </head>
 
@@ -15,9 +15,7 @@
     <h2>BOM BOARD</h2>
     <section class="welcome">
         <p th:text="|안녕하세요, ${member.memberName}님!|" class="welcome-text">안녕하세요, 회원님!</p>
-        <form action="/log-out" method="post" class="logout">
-            <button type="submit" class="logout_btn"> 로그아웃</button>
-        </form>
+        <button onclick="location.href='login.html'" th:onclick="|location.href='@{/logout}'|" type="submit" class="logout_btn"> 로그아웃</button>
     </section>
 
     <section class="board-top">

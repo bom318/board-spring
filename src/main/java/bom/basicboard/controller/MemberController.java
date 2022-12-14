@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import bom.basicboard.domain.Member;
 import bom.basicboard.service.MemberService;
@@ -43,6 +44,13 @@ public class MemberController {
 
         model.addAttribute("member", loginMember);
         return "redirect:/board";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.removeAttribute("loginMember");
+        return "/login";
     }
 
     @GetMapping("/join")
