@@ -8,7 +8,7 @@
 
     <script src="https://kit.fontawesome.com/8d62fb13e2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/writeForm.css">
-    <script src="/src/writeForm.js"></script>
+    <script src="/src/writeForm.js" defer></script>
     <title>게시판</title>
 </head>
 
@@ -39,7 +39,7 @@
 
             <label for="content">내용</label>
             <textarea name="content" id="boardContent" cols="30" rows="10"></textarea>
-            <button type="submit" class="write_btn">글쓰기</button>
+            <input type="submit" class="write_btn" value="저장" id="write_btn">
         </form>
     </section>
 
