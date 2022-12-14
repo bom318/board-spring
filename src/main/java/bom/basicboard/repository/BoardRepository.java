@@ -23,5 +23,6 @@ public interface BoardRepository {
 
     public HashMap<Long, File> saveFiles(Long boardNum, List<MultipartFile> multipartFiles);
     public File findFile(Long boardNum, Long fileId);
+    public void deleteFile(Long boardNum);
 
 }

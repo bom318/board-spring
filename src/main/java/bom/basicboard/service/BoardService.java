@@ -65,5 +65,8 @@ public class BoardService {
     public File findFile(Long boardNum, Long fileId) {
         return boardRepository.findFile(boardNum, fileId);
     }
+    public void initFile(Long boardNum) {
+        boardRepository.deleteFile(boardNum);
+    }
 
 }

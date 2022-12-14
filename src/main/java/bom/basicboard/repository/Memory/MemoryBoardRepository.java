@@ -126,21 +126,26 @@ public class MemoryBoardRepository implements BoardRepository {
             return null;
         } else {
             for (MultipartFile multipartFile : multipartFiles) {
-                String originalFilename = multipartFile.getOriginalFilename();
-                String storeFileName = createStoreFileName(originalFilename);
+                if (multipartFile.isEmpty()) {
+                    return null;
+                } else {
+                    String originalFilename = multipartFile.getOriginalFilename();
+                    String storeFileName = createStoreFileName(originalFilename);
 
-                try {
-                    log.info("file full path={}", getFullPath(storeFileName));
-                    multipartFile.transferTo(new java.io.File(getFullPath(storeFileName)));
-                } catch (IllegalStateException e) {
-                    log.error("storeFile error={}", e);
-                } catch (IOException e) {
-                    log.error("storeFile error={}", e);
-                }finally {
-                    File savedFile = new File(boardNum, originalFilename, storeFileName);
-                    savedFile.setFileId(++fileId);
-                    fileStore.put(savedFile.getFileId(), savedFile);
+                    try {
+                        log.info("file full path={}", getFullPath(storeFileName));
+                        multipartFile.transferTo(new java.io.File(getFullPath(storeFileName)));
+                    } catch (IllegalStateException e) {
+                        log.error("storeFile error={}", e);
+                    } catch (IOException e) {
+                        log.error("storeFile error={}", e);
+                    } finally {
+                        File savedFile = new File(boardNum, originalFilename, storeFileName);
+                        savedFile.setFileId(++fileId);
+                        fileStore.put(savedFile.getFileId(), savedFile);
+                    }
                 }
+
             }
             return fileStore;
         }
@@ -171,6 +176,15 @@ public class MemoryBoardRepository implements BoardRepository {
 
         return files.get(fileId);
 
+    }
+
+    
+
+    @Override
+    public void deleteFile(Long boardNum) {
+        Board findBoard = findOne(boardNum);
+        HashMap<Long, File> files = findBoard.getFiles();
+        files.clear();
     }
 
     public void clearStore() {

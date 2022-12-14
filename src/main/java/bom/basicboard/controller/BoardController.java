@@ -29,6 +29,7 @@ import bom.basicboard.domain.Board;
 import bom.basicboard.domain.BoardForm;
 import bom.basicboard.domain.File;
 import bom.basicboard.domain.Member;
+import bom.basicboard.repository.BoardRepository;
 import bom.basicboard.service.BoardService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -72,7 +73,6 @@ public class BoardController {
 
     @PostMapping("/write")
     public String write(@ModelAttribute BoardForm form, RedirectAttributes redirectAttributes) {
-        // List<File> files = fileStore.storeFiles(form.getBoardNum(), form.getFiles());
         HashMap<Long, File> files = boardService.saveFile(form.getBoardNum(), form.getFiles());
         Board newBoard = new Board();
         newBoard.setBoardTitle(form.getBoardTitle());
@@ -114,4 +114,28 @@ public class BoardController {
                 .body(resource);
     }
 
+    @GetMapping("/update/{boardNum}")
+    public String update(@PathVariable Long boardNum, Model model) {
+        Board findBoard = boardService.getBoard(boardNum);
+        model.addAttribute("board", findBoard);
+        return "editForm";
+    }
+
+    @PostMapping("/update/{boardNum}")
+    public String update(@PathVariable Long boardNum, @ModelAttribute BoardForm board, RedirectAttributes redirectAttributes) {
+
+        boardService.initFile(boardNum);
+        
+        HashMap<Long, File> files = boardService.saveFile(boardNum, board.getFiles());
+        Board newBoard = new Board();
+        newBoard.setBoardTitle(board.getBoardTitle());
+        newBoard.setContent(board.getContent());
+        newBoard.setDate(board.getDate());
+        newBoard.setWriter(board.getWriter());
+        newBoard.setFiles(files);
+        boardService.updateBoard(boardNum, newBoard);
+
+        redirectAttributes.addAttribute("boardNum", boardNum);
+        return "redirect:/boardDetail/{boardNum}";
+    }
 }

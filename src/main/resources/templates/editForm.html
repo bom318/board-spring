@@ -7,24 +7,18 @@
     <meta name="description" content="스프링 기본 게시판">
 
     <script src="https://kit.fontawesome.com/8d62fb13e2.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/boardDetail.css">
+    <link rel="stylesheet" href="/css/editForm.css">
     <title>게시판</title>
 </head>
 
 <body>
     <h2>BOM BOARD</h2>
-    <section class="welcome">
-        <p th:text="|안녕하세요, ${member.memberName}님!|" class="welcome-text">안녕하세요, 회원님!</p>
-        <form action="/log-out" method="post" class="logout">
-            <button type="submit" class="logout_btn"> 로그아웃</button>
-        </form>
-    </section>
 
     <section class="board">
-        <form action="" method="post" class="board_form">
+        <form th:action="|/update/${board.boardNum}|" method="post" class="board_form" enctype="multipart/form-data">
             <label for="boardTitle">제목</label>
             <input type="text" name="boardTitle" id="boardTitle" class="boardTitle" th:value="${board.boardTitle}"
-                value="안녕하세요" readonly>
+                value="안녕하세요">
             <div class="flexBox">
                 <div class="writerBox">
                     <label for="writer">작성자</label>
@@ -38,21 +32,17 @@
                 </div>
 
             </div>
-            <label th:if="${board.files != null}" for="files">첨부파일</label>
-            <span th:if="${board.files != null}">
-                <a th:each="file : ${board.files}" th:href="|/boardDetail/${board.boardNum}/${file.value.getFileId()}|" th:text="${file.value.getUploadFileName()}" class="files">첨부파일1</a>
-            </span>
-            
+            <input type="file" id="files" name="files" multiple="multiple">
+
 
             <label for="content">내용</label>
-            <textarea name="content" id="boardContent" cols="30" rows="10" readonly
+            <textarea name="content" id="boardContent" cols="30" rows="10"
                 th:text="${board.content}">반갑습니다</textarea>
 
+            <button type="submit" class="write_btn" id="save_btn">저장하기</button>
         </form>
-        <div class="btns">
-            <a th:href="|/update/${board.boardNum}|" th:if="${board.writer==member.memberName}" class="write_btn">수정하기</a>
-            <a href="/board" class="write_btn">돌아가기</a>
-        </div>
+            <a th:href="|/boardDetail/${board.boardNum}|" class="write_btn">돌아가기</a>
+
 
 
     </section>
