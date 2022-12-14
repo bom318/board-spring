@@ -15,6 +15,7 @@
             <form action="/login" method="post">
                 <input type="text" name="memberId" id="memberId" placeholder="ID를 입력하세요">
                 <input type="password" name="password" id="password" placeholder="PASSWORD를 입력하세요">
+                <span th:if="${msg != null}" th:text="${msg}" class="error">아이디와 비밀번호를 확인하세요</span>
                 <input type="submit" value="로그인" class="btn" id="submit_btn">
             </form>
             

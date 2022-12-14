@@ -35,6 +35,7 @@ public class MemberController {
 
         Member loginMember = memberService.login(memberId, password);
         if(loginMember == null) {
+            model.addAttribute("msg","아이디와 비밀번호를 확인하세요");
             return "login";
         }
 

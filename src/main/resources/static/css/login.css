@@ -24,6 +24,9 @@ input[type=text],input[type=password] {
     text-align: center;
     margin: 50px 0;
 }
+.error {
+    color: red;
+}
 .btn {
     background-color: blanchedalmond;
     border: none;
