@@ -51,6 +51,7 @@
         </form>
         <div class="btns">
             <a th:href="|/update/${board.boardNum}|" th:if="${board.writer==member.memberName}" class="write_btn">수정하기</a>
+            <a th:href="|/delete/${board.boardNum}|" th:if="${board.writer==member.memberName}" class="write_btn">삭제하기</a>
             <a href="/board" class="write_btn">돌아가기</a>
         </div>
 

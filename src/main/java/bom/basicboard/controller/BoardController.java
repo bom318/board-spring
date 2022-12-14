@@ -125,7 +125,7 @@ public class BoardController {
     public String update(@PathVariable Long boardNum, @ModelAttribute BoardForm board, RedirectAttributes redirectAttributes) {
 
         boardService.initFile(boardNum);
-        
+
         HashMap<Long, File> files = boardService.saveFile(boardNum, board.getFiles());
         Board newBoard = new Board();
         newBoard.setBoardTitle(board.getBoardTitle());
@@ -137,5 +137,11 @@ public class BoardController {
 
         redirectAttributes.addAttribute("boardNum", boardNum);
         return "redirect:/boardDetail/{boardNum}";
+    }
+
+    @GetMapping("/delete/{boardNum}")
+    public String delete(@PathVariable Long boardNum) {
+        boardService.deleteBoard(boardNum);
+        return "redirect:/board";
     }
 }
