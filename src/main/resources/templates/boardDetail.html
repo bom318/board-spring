@@ -7,7 +7,8 @@
     <meta name="description" content="스프링 기본 게시판">
 
     <script src="https://kit.fontawesome.com/8d62fb13e2.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../static/css/boardDetail.css">
+    <link rel="stylesheet" href="/css/boardDetail.css">
+    <script src="/src/boardDetail.js" defer></script>
     <title>게시판</title>
 </head>
 
@@ -50,19 +51,20 @@
                 th:text="${board.content}">반갑습니다</textarea>
 
         </form>
-        <form action="">
+        <form th:action="|/boardDetail/${board.boardNum}/saveRepl|" method="post">
             <div class="repl">
                 <div class="reply-list">
-                    <div class="reply_item">
-                        <span class="repl_writer">미역</span>
-                        <span class="repl_content">저도 반가워염</span>
-                        <span class="repl_date">2022.12.15</span>
+                    <div th:each="repl : ${board.reples}" class="reply_item">
+                        <span th:text="${repl.value.getReWriter()}" class="repl_writer">미역</span>
+                        <span th:text="${repl.value.getReContent()}" class="repl_content">저도 반가워염</span>
+                        <span th:text="${repl.value.getReDate()}" class="repl_date">2022.12.15</span>
                         <a href="" class="repl_delete-btn">X</a>
                     </div>
 
                     <div class="reply-write">
-                        <input type="text" class="repl_input">
-                        <button type="submit">댓글달기</button>
+                        <input type="text" class="repl_input" name="reContent">
+                        <input type="hidden" th:value="${board.boardNum}" class="boardNum">
+                        <button type="submit" class="submitRepl">댓글달기</button>
                     </div>
 
                 </div>
