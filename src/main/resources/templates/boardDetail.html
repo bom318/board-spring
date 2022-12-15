@@ -7,7 +7,7 @@
     <meta name="description" content="스프링 기본 게시판">
 
     <script src="https://kit.fontawesome.com/8d62fb13e2.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/boardDetail.css">
+    <link rel="stylesheet" href="../static/css/boardDetail.css">
     <title>게시판</title>
 </head>
 
@@ -40,18 +40,39 @@
             </div>
             <label th:if="${board.files != null}" for="files">첨부파일</label>
             <span th:if="${board.files != null}">
-                <a th:each="file : ${board.files}" th:href="|/boardDetail/${board.boardNum}/${file.value.getFileId()}|" th:text="${file.value.getUploadFileName()}" class="files">첨부파일1</a>
+                <a th:each="file : ${board.files}" th:href="|/boardDetail/${board.boardNum}/${file.value.getFileId()}|"
+                    th:text="${file.value.getUploadFileName()}" class="files">첨부파일1</a>
             </span>
-            
+
 
             <label for="content">내용</label>
             <textarea name="content" id="boardContent" cols="30" rows="10" readonly
                 th:text="${board.content}">반갑습니다</textarea>
 
         </form>
+        <form action="">
+            <div class="repl">
+                <div class="reply-list">
+                    <div class="reply_item">
+                        <span class="repl_writer">미역</span>
+                        <span class="repl_content">저도 반가워염</span>
+                        <span class="repl_date">2022.12.15</span>
+                        <a href="" class="repl_delete-btn">X</a>
+                    </div>
+
+                    <div class="reply-write">
+                        <input type="text" class="repl_input">
+                        <button type="submit">댓글달기</button>
+                    </div>
+
+                </div>
+            </div>
+        </form>
         <div class="btns">
-            <a th:href="|/update/${board.boardNum}|" th:if="${board.writer==member.memberName}" class="write_btn">수정하기</a>
-            <a th:href="|/delete/${board.boardNum}|" th:if="${board.writer==member.memberName}" class="write_btn">삭제하기</a>
+            <a th:href="|/update/${board.boardNum}|" th:if="${board.writer==member.memberName}"
+                class="write_btn">수정하기</a>
+            <a th:href="|/delete/${board.boardNum}|" th:if="${board.writer==member.memberName}"
+                class="write_btn">삭제하기</a>
             <a href="/board" class="write_btn">돌아가기</a>
         </div>
 

@@ -4,6 +4,7 @@ h2 {
     background-color: aquamarine;
     border-radius: 20px;
 }
+
 a {
     text-decoration: none;
     color: black;
@@ -13,14 +14,17 @@ a {
     display: flex;
     align-items: center;
 }
+
 .welcome-text {
     font-weight: 600;
 }
+
 .logout {
     display: flex;
     align-items: center;
     margin: 0;
 }
+
 .logout_btn {
     background-color: blanchedalmond;
     border: none;
@@ -29,15 +33,18 @@ a {
     border-radius: 10px;
     margin-left: 20px;
 }
+
 .logout_btn:hover {
     cursor: pointer;
     background-color: antiquewhite;
     color: gray;
 }
+
 section {
     width: 70%;
     margin: auto;
 }
+
 .goback {
     background-color: blanchedalmond;
     border: none;
@@ -47,19 +54,25 @@ section {
     color: black;
     text-decoration: none;
 }
+
 .goback:hover {
     background-color: antiquewhite;
     color: gray;
 }
+
 .board_form {
     display: flex;
     flex-direction: column;
     margin-top: 30px;
 }
+
 .boardTitle {
     width: 70%;
 }
-.boardTitle, .writer, .date{
+
+.boardTitle,
+.writer,
+.date {
     height: 35px;
     background-color: rgb(241, 239, 237);
     border: none;
@@ -68,24 +81,30 @@ section {
     margin-top: 10px;
     margin-bottom: 20px;
 }
+
 .flexBox {
     display: flex;
 }
-.writerBox, .dateBox {
+
+.writerBox,
+.dateBox {
     display: flex;
     flex-direction: column;
     width: 30%;
     margin-right: 70px;
 }
+
 span {
     margin: 20px 10px 30px 0;
 }
+
 .files {
     background-color: rgb(241, 239, 237);
     padding: 10px;
     border-radius: 10px;
-    
+
 }
+
 #boardContent {
     resize: none;
     margin: 10px 0;
@@ -97,10 +116,82 @@ span {
     outline: none;
     padding: 10px;
 }
+
+.reply-list {
+    background-color: rgb(241, 239, 237);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.reply_item {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-bottom: 1px dashed darkgray;
+}
+
+.repl_writer {
+    font-weight: 600;
+    background-color: cadetblue;
+    width: 15%;
+    text-align: center;
+    padding: 3px;
+    border-radius: 20px;
+    margin: 0 10px 0 0;
+}
+
+.repl_content {
+    margin: 0 10px 0 0;
+    width: 60%;
+    text-align: center;
+}
+
+.repl_date {
+    margin: 0 10px 0 0;
+    font-size: small;
+}
+
+.repl_delete-btn {
+    display: flex;
+    width: 15px;
+    align-items: center;
+    justify-content: center;
+    height: 15px;
+    background: burlywood;
+    font-size: small;
+    padding: 3px;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.reply-write {
+    margin-top: 20px;
+}
+
+.repl_input {
+    width: 80%;
+    height: 50px;
+    border-radius: 10px;
+    outline: none;
+    margin-right: 20px;
+}
+
+.reply-write button {
+    border: none;
+    background-color: darkgray;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
 .btns {
     display: flex;
     flex-direction: column;
 }
+
 .write_btn {
     background-color: blanchedalmond;
     border: none;
@@ -114,6 +205,7 @@ span {
     align-items: center;
     justify-content: center;
 }
+
 .write_btn:hover {
     background-color: antiquewhite;
     color: #999999;
