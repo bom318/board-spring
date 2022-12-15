@@ -24,12 +24,18 @@ public class MemberService {
         if (member.getMemberName() == null || member.getMemberName() == "") {
             member.setMemberName(member.getMemberId());
         }
-        // 중복회원 검사
-        Optional<Member> findMember = memberRepository.findByMemberId(member.getMemberId());
-        findMember.ifPresent(m -> {
-            throw new IllegalStateException("이미 존재하는 회원입니다");
-        });
+        
         memberRepository.save(member);
+    }
+
+    public Boolean checkId(String memberId) {
+        // 중복회원 검사
+        Optional<Member> findMember = memberRepository.findByMemberId(memberId);
+        if(findMember.isPresent()) {
+            return false;
+        }else {
+            return true;
+        }
     }
 
     public Member updateMember(Member member, String password, String memberName) {

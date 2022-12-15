@@ -3,14 +3,17 @@ package bom.basicboard.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import bom.basicboard.domain.Member;
@@ -69,13 +72,18 @@ public class MemberController {
             return "join";
         }
         //비밀번호 암호화
-        
 
         Member result = new Member(member.getMemberId(), member.getPassword(), member.getMemberName());
         memberService.join(result);
 
         return "redirect:/";
     }
+
+    // @GetMapping("/join/checkId/{memberId}")
+    // @ResponseBody
+    // public Boolean checkId(@PathVariable String memberId) {
+    //     return memberService.checkId(memberId);
+    // }
 
 
 }
