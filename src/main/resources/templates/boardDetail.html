@@ -56,16 +56,15 @@
             <div class="repl">
                 <div class="reply-list">
                     <div class="reply_items">
-                        <!-- js 에서 html 그림 -->
-                        <!-- <div th:each="repl : ${board.reples}" class="reply_item">
+                        <div th:each="repl : ${board.reples}" class="reply_item" th:id="|repl_${repl.value.getReId()}|">
+                            <input type="hidden" class="reIdInput" th:value="${repl.value.getReId()}">
                             <span th:text="${repl.value.getReWriter()}" class="repl_writer">미역</span>
                             <span th:text="${repl.value.getReContent()}" class="repl_content">저도 반가워염</span>
                             <span th:text="${repl.value.getReDate()}" class="repl_date">2022.12.15</span>
-                            <a th:href="|/boardDetail/${board.boardNum}/deleteRe/${repl.value.getReId()}|" class="repl_delete-btn">X</a>
-                        </div> -->
+                            <!-- <a th:href="|/boardDetail/${board.boardNum}/deleteRe/${repl.value.getReId()}|" class="repl_delete-btn">X</a> -->
+                            <a th:onclick="|deleteRepl(${board.boardNum},${repl.value.getReId()})|" class="repl_delete-btn">X</a>
+                        </div>
                     </div>
-                    
-
                     <div class="reply-write">
                         <input type="text" class="repl_input" name="reContent">
                         <button type="submit" class="submitRepl">댓글달기</button>
