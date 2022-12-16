@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -150,6 +151,14 @@ public class BoardController {
         return "redirect:/board";
     }
 
+    @GetMapping("/boardDetail/{boardNum}/getRepl")
+    @ResponseBody
+    public Collection<Rewrite> getRepl(@PathVariable Long boardNum) {
+        Board board = boardService.getBoard(boardNum);
+        HashMap<Long, Rewrite> reples = board.getReples();
+        return reples.values();
+    }
+
     @PostMapping("/boardDetail/{boardNum}/saveRepl")
     public String saveRepl(@PathVariable Long boardNum, @RequestParam(name = "reContent") String reContent,
     @SessionAttribute(name = "loginMember", required = false) Member loginMember, RedirectAttributes redirectAttributes) {
@@ -161,6 +170,15 @@ public class BoardController {
         redirectAttributes.addAttribute("boardNum", boardNum);
 
         
+        return "redirect:/boardDetail/{boardNum}";
+    }
+
+    @PostMapping("/boardDetail/{boardNum}/deleteRe/{reId}")
+    public String deleteRe(@PathVariable Long boardNum, @PathVariable Long reId, RedirectAttributes redirectAttributes ) {
+        boardService.deleteRe(reId, boardNum);
+
+        redirectAttributes.addAttribute("boardNum",boardNum);
+
         return "redirect:/boardDetail/{boardNum}";
     }
 }
