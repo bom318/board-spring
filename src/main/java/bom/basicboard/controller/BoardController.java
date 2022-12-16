@@ -160,17 +160,18 @@ public class BoardController {
     }
 
     @PostMapping("/boardDetail/{boardNum}/saveRepl")
+    @ResponseBody
     public String saveRepl(@PathVariable Long boardNum, @RequestParam(name = "reContent") String reContent,
-    @SessionAttribute(name = "loginMember", required = false) Member loginMember, RedirectAttributes redirectAttributes) {
+    @SessionAttribute(name = "loginMember", required = false) Member loginMember) {
 
         
         Rewrite repl = new Rewrite(reContent,loginMember.getMemberName());
         boardService.saveRe(boardNum, repl);
 
-        redirectAttributes.addAttribute("boardNum", boardNum);
+        //redirectAttributes.addAttribute("boardNum", boardNum);
 
         
-        return "redirect:/boardDetail/{boardNum}";
+        return "ok";
     }
 
     @PostMapping("/boardDetail/{boardNum}/deleteRe/{reId}")

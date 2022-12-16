@@ -52,7 +52,7 @@
                 th:text="${board.content}">반갑습니다</textarea>
 
         </form>
-        <form th:action="|/boardDetail/${board.boardNum}/saveRepl|" method="post">
+        <!-- <form th:action="|/boardDetail/${board.boardNum}/saveRepl|" method="post"> -->
             <div class="repl">
                 <div class="reply-list">
                     <div class="reply_items">
@@ -73,7 +73,7 @@
 
                 </div>
             </div>
-        </form>
+        <!-- </form> -->
         <div class="btns">
             <a th:href="|/update/${board.boardNum}|" th:if="${board.writer==member.memberName}"
                 class="write_btn">수정하기</a>
