@@ -62,7 +62,7 @@
                         <span th:text="${repl.value.getReContent()}" class="repl_content">저도 반가워염</span>
                         <span th:text="${repl.value.getReDate()}" class="repl_date">2022.12.15</span>
 
-                        <a th:if="|${repl.value.getReWriter()==member.memberName}|" th:onclick="|deleteRepl(${board.boardNum},${repl.value.getReId()})|"
+                        <a th:if="|${repl.value.getMemberId()==member.memberId}|" th:onclick="|deleteRepl(${board.boardNum},${repl.value.getReId()})|"
                             class="repl_delete-btn">X</a>
                     </div>
                 </div>
@@ -75,9 +75,9 @@
         </div>
 
         <div class="btns">
-            <a th:href="|/update/${board.boardNum}|" th:if="${board.writer==member.memberName}"
+            <a th:href="|/update/${board.boardNum}|" th:if="${board.memberId==member.memberId}"
                 class="write_btn">수정하기</a>
-            <a th:href="|/delete/${board.boardNum}|" th:if="${board.writer==member.memberName}"
+            <a th:href="|/delete/${board.boardNum}|" th:if="${board.memberId==member.memberId}"
                 class="write_btn">삭제하기</a>
             <a href="/board" class="write_btn">돌아가기</a>
         </div>

@@ -17,6 +17,8 @@ public class Board {
     @NotBlank
     private Long boardNum;
     @NotBlank
+    private String memberId;
+    @NotBlank
     private String boardTitle;
     @NotBlank
     private String writer;

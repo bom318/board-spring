@@ -11,6 +11,8 @@ public class Rewrite {
     @NotBlank
     private Long reId;
     @NotBlank
+    private String memberId;
+    @NotBlank
     private String reContent;
     @NotBlank
     private String reWriter;
@@ -20,7 +22,7 @@ public class Rewrite {
     private Long boardNum;
     public Rewrite() {
     }
-    public Rewrite(String reContent, String reWriter) {
+    public Rewrite(String reContent, String reWriter, String memberId) {
         this.reContent = reContent;
         this.reWriter = reWriter;
     }

@@ -197,7 +197,7 @@ public class MemoryBoardRepository implements BoardRepository {
     public void init() {
         write(new Board("hi", "bom", "하이루"));
         write(new Board("안녕하세여", "미역", "귀여웡"));
-        writeRe(1L, new Rewrite("2222", "미역"));
+        writeRe(1L, new Rewrite("2222", "미역","miyoek10"));
     }
 
 }

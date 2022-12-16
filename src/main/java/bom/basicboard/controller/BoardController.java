@@ -77,9 +77,10 @@ public class BoardController {
     }
 
     @PostMapping("/write")
-    public String write(@ModelAttribute BoardForm form, RedirectAttributes redirectAttributes) {
+    public String write(@SessionAttribute(name = "loginMember", required = false) Member loginMember, @ModelAttribute BoardForm form, RedirectAttributes redirectAttributes) {
         HashMap<Long, File> files = boardService.saveFile(form.getBoardNum(), form.getFiles());
         Board newBoard = new Board();
+        newBoard.setMemberId(loginMember.getMemberId());
         newBoard.setBoardTitle(form.getBoardTitle());
         newBoard.setContent(form.getContent());
         newBoard.setDate(form.getDate());
@@ -165,7 +166,7 @@ public class BoardController {
     @SessionAttribute(name = "loginMember", required = false) Member loginMember) {
 
         
-        Rewrite repl = new Rewrite(reContent,loginMember.getMemberName());
+        Rewrite repl = new Rewrite(reContent,loginMember.getMemberName(),loginMember.getMemberId());
         boardService.saveRe(boardNum, repl);
 
         //redirectAttributes.addAttribute("boardNum", boardNum);

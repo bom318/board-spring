@@ -38,7 +38,7 @@ public class MemoryBoardRepositoryTest {
         Board board = new Board("hi","bom","안녕하세요");
         Board savedBoard = boardRepository.write(board);
         
-        Rewrite rewrite = new Rewrite("하이루","미역");
+        Rewrite rewrite = new Rewrite("하이루","미역","miyoek");
         boardRepository.writeRe(savedBoard.getBoardNum(), rewrite);
 
         boardRepository.deleteRe(savedBoard.getBoardNum(), rewrite.getReId());
@@ -74,8 +74,8 @@ public class MemoryBoardRepositoryTest {
         Board board = new Board("hi","bom","안녕하세요");
         Board savedBoard = boardRepository.write(board);
 
-        Rewrite rewrite = new Rewrite("하이루","미역");
-        Rewrite rewrite2 = new Rewrite("하이루","대규");
+        Rewrite rewrite = new Rewrite("하이루","미역","miyoek");
+        Rewrite rewrite2 = new Rewrite("하이루","대규","eorb");
         
         boardRepository.writeRe(savedBoard.getBoardNum(), rewrite);
         boardRepository.writeRe(savedBoard.getBoardNum(), rewrite2);
