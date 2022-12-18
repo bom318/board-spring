@@ -51,3 +51,21 @@ a {
     text-decoration: none;
     color: black;
 }
+.checkIdDuplicate {
+    margin-top: 10px;
+    display: flex;
+    margin-left: 10px;
+    align-items: center;
+}
+.checkIdBtn {
+    border: none;
+    padding: 5px;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    margin-right: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.checkIdBtn:hover {
+    background-color: beige;
+}

@@ -79,11 +79,11 @@ public class MemberController {
         return "redirect:/";
     }
 
-    // @GetMapping("/join/checkId/{memberId}")
-    // @ResponseBody
-    // public Boolean checkId(@PathVariable String memberId) {
-    //     return memberService.checkId(memberId);
-    // }
+    @GetMapping("/join/checkId/{memberId}")
+    @ResponseBody
+    public Boolean checkId(@PathVariable String memberId) {
+        return memberService.checkId(memberId);
+    }
 
 
 }

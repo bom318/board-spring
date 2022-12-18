@@ -14,6 +14,10 @@
         <form action="/join" method="post">
             <div>
                 <input type="text" name="memberId" id="memberId" placeholder="사용하실 ID를 입력해주세요">
+                <div class="checkIdDuplicate">
+                    <a class="checkIdBtn">중복확인</a>
+                    <span class="checkIdMsg"></span>
+                </div>
                 <span class="check" id="checkId"></span>
             </div>
             <div>

@@ -6,11 +6,29 @@ const inputPw = document.querySelector('#password');
 const inputName = document.querySelector('#memberName');
 const checkId = document.querySelector('#checkId');
 const checkPassword = document.querySelector('#checkPassword');
+const checkIdBtn = document.querySelector('.checkIdBtn');
+const checkIdMsg = document.querySelector('.checkIdMsg');
 
 //정규표현식
 const id = /^[a-zA-Z][0-9a-zA-Z]{7,}$/;
 const password = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{7,}$/;
 
+
+//id 중복검사
+checkIdBtn.addEventListener('click', () => {
+    validateDuplicationId(inputId.value).then(result => {
+        if (result == false) {
+            changeText(checkIdMsg, "이미 존재하는 아이디입니다");
+            checkIdMsg.style.color = "red";
+            inputId.focus();
+        }else {
+            changeText(checkIdMsg, "사용 가능한 아이디입니다");
+            changeText(checkId, "");
+            checkIdMsg.style.color = "gray";
+            returnBorder(inputId);
+        }
+    }).catch(console.log);
+})
 
 //id 유효성 검사
 inputId.addEventListener('keyup', () => {
@@ -23,6 +41,7 @@ inputId.addEventListener('keyup', () => {
     } else {
         returnBorder(inputId);
         changeText(checkId, "");
+        changeText(checkIdMsg, "");
     }
 })
 
@@ -66,18 +85,13 @@ submit_btn.addEventListener('click', (e) => {
         changeText(checkPassword, "비밀번호는 영문 대 소문자+숫자+특수기호 8자리 이상으로 생성해주세요");
         inputPw.focus();
         exit;
+    }else if(checkIdMsg.innerText !== "사용 가능한 아이디입니다") {
+        e.preventDefault();
+        changeBorder(inputId);
+        changeText(checkId, "중복확인은 필수입니다");
+        inputId.focus();
+        exit;
     }
-    // validateDuplicationId().then(result => {
-    //     if (result == false) {
-    //         e.preventDefault();
-    //         changeBorder(inputId);
-    //         changeText(checkId, "이미 존재하는 아이디입니다");
-    //         inputId.focus();
-    //         exit;
-    //     }else {
-    //         return;
-    //     }
-    // })
 
 
 })
@@ -96,8 +110,8 @@ function changeText(target, message) {
 }
 
 //fetch
-// async function validateDuplicationId() {
-//     const response = await fetch(`/join/checkId/${inputId.value}`);
-//     const data = await response.json();
-//     return data;
-// }
+async function validateDuplicationId(inputId) {
+    const response = await fetch(`/join/checkId/${inputId}`);
+    const data = await response.json();
+    return data;
+}
