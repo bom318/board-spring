@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import bom.basicboard.domain.Member;
 import bom.basicboard.repository.MemberRepository;
 
-@Repository
+//@Repository
 public class MemoryMemberRepository implements MemberRepository{
 
     Map<Long, Member> store = new HashMap<>();
