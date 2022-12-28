@@ -26,4 +26,5 @@ public interface BoardRepository {
     public File findFile(Long boardNum, Long fileId);
     public void deleteFile(Long boardNum);
 
+
 }

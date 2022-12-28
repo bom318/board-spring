@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -62,6 +63,7 @@ public class BoardController {
 
         List<Board> boardList = boardService.getBoardList(searchCond);
         model.addAttribute("boardList", boardList);
+        
 
         return "board";
     }
@@ -186,4 +188,5 @@ public class BoardController {
 
         return "redirect:/boardDetail/{boardNum}";
     }
+
 }
