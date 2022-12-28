@@ -8,6 +8,7 @@
 
     <script src="https://kit.fontawesome.com/8d62fb13e2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/boardList.css">
+    <script src="/src/board.js" defer></script>
     <title>게시판</title>
 </head>
 
@@ -20,11 +21,12 @@
 
     <section class="board-top">
         <form th:object="${searchCond}" method="get" class="board-form">
+
             <select name="filter" id="search-filter">
                 <option value="title">제목</option>
                 <option value="name">작성자</option>
             </select>
-            <input type="text" name="word">
+            <input type="text" name="word" class="word">
             <button type="submit" class="submit_btn">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
@@ -42,7 +44,7 @@
         <div class="board board-items" th:each="board: ${boardList}">
             <span class="boardNum board_span" th:text="${board.boardNum}">1</span>
             <span class="boardTitle board_span"><a th:href="|/boardDetail/${board.boardNum}|" th:text="${board.boardTitle}">안녕하세요</a>
-                <span class="boardRenum" th:if="${board.reples != null}" th:text="${board.reples.size()}">2</span>
+                <span class="boardRenum" th:if="${board.reNum != 0}" th:text="${board.reNum}">2</span>
             </span>
             <span class="boardWriter board_span" th:text="${board.writer}">보미</span>
             <span class="boardDate board_span" th:text="${board.date}">2022.12.11</span>
