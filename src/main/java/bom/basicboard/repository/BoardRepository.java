@@ -7,12 +7,13 @@ import java.util.Optional;
 import org.springframework.web.multipart.MultipartFile;
 
 import bom.basicboard.domain.Board;
+import bom.basicboard.domain.BoardSearchCond;
 import bom.basicboard.domain.File;
 import bom.basicboard.domain.Rewrite;
 
 public interface BoardRepository {
     
-    public Optional<List<Board>> findAll();
+    public Optional<List<Board>> findAll(BoardSearchCond searchCond);
     public Board findOne(Long boardNum);
     public Board write(Board board);
     public Board update(Long boardNum, Board board);

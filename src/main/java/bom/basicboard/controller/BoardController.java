@@ -32,6 +32,7 @@ import org.springframework.web.util.UriUtils;
 
 import bom.basicboard.domain.Board;
 import bom.basicboard.domain.BoardForm;
+import bom.basicboard.domain.BoardSearchCond;
 import bom.basicboard.domain.File;
 import bom.basicboard.domain.Member;
 import bom.basicboard.domain.Rewrite;
@@ -48,7 +49,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/board")
-    public String board(@SessionAttribute(name = "loginMember", required = false) Member loginMember, Model model) {
+    public String board(@SessionAttribute(name = "loginMember", required = false) Member loginMember,@ModelAttribute BoardSearchCond searchCond, Model model) {
         if (loginMember == null) {
             return "login";
         }
@@ -58,7 +59,8 @@ public class BoardController {
         Member member = new Member(memberId, password, memberName);
         model.addAttribute("member", member);
 
-        List<Board> boardList = boardService.getBoardList();
+
+        List<Board> boardList = boardService.getBoardList(searchCond);
         model.addAttribute("boardList", boardList);
 
         return "board";
@@ -147,8 +149,9 @@ public class BoardController {
     }
 
     @GetMapping("/delete/{boardNum}")
-    public String delete(@PathVariable Long boardNum) {
-        boardService.deleteBoard(boardNum);
+    public String delete(@PathVariable Long boardNum, @ModelAttribute BoardSearchCond searchCond) {
+
+        boardService.deleteBoard(boardNum,searchCond);
         return "redirect:/board";
     }
 

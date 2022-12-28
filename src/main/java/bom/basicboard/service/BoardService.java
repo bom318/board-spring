@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import bom.basicboard.domain.Board;
+import bom.basicboard.domain.BoardSearchCond;
 import bom.basicboard.domain.File;
 import bom.basicboard.domain.Rewrite;
 import bom.basicboard.repository.BoardRepository;
@@ -25,8 +26,8 @@ public class BoardService {
     }
 
     
-    public List<Board> getBoardList() {
-        return boardRepository.findAll().get();
+    public List<Board> getBoardList(BoardSearchCond searchCond) {
+        return boardRepository.findAll(searchCond).get();
     }
 
     public Board getBoard(Long boardNum) {
@@ -41,9 +42,9 @@ public class BoardService {
         return boardRepository.update(boardNum, board);
     }
 
-    public List<Board> deleteBoard(Long boardNum) {
+    public List<Board> deleteBoard(Long boardNum, BoardSearchCond searchCond) {
         boardRepository.delete(boardNum);
-        return boardRepository.findAll().get();
+        return boardRepository.findAll(searchCond).get();
     }
 
     // 댓글
