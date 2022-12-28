@@ -9,14 +9,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import bom.basicboard.domain.Board;
+import bom.basicboard.domain.BoardSearchCond;
 import bom.basicboard.domain.File;
 import bom.basicboard.domain.Rewrite;
 import bom.basicboard.repository.BoardRepository;
@@ -44,9 +47,25 @@ public class MemoryBoardRepository implements BoardRepository {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
-    public Optional<List<Board>> findAll() {
+    public Optional<List<Board>> findAll(BoardSearchCond searchCond) {
+        String filter = searchCond.getFilter();
+        String word = searchCond.getWord();
 
-        return Optional.ofNullable(new ArrayList<>(boardStore.values()));
+        List<Board> boardList = boardStore.values().stream().filter(board -> {
+            if(!StringUtils.hasText(filter)) {
+                return true;
+            }else {
+                if(filter.equals("title")) {
+                    log.info("filter==title call");
+                    return board.getBoardTitle().contains(word);
+                }else {
+                    log.info("filter != title call");
+                    return board.getWriter().equals(word);
+                }
+            }
+        }).collect(Collectors.toList());
+
+        return Optional.ofNullable(boardList);
     }
 
     @Override

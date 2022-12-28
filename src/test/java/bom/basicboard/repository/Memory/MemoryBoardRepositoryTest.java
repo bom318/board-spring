@@ -8,6 +8,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import bom.basicboard.domain.Board;
+import bom.basicboard.domain.BoardSearchCond;
 import bom.basicboard.domain.Rewrite;
 import lombok.extern.slf4j.Slf4j;
 
@@ -65,7 +66,8 @@ public class MemoryBoardRepositoryTest {
     void testWrite() {
         Board board = new Board("hi","bom","안녕하세요");
         boardRepository.write(board);
-        Optional<List<Board>> boards = boardRepository.findAll();
+        BoardSearchCond searchCond = null;
+        Optional<List<Board>> boards = boardRepository.findAll(searchCond);
         Assertions.assertThat(boards.get().size()).isEqualTo(1);
     }
 
