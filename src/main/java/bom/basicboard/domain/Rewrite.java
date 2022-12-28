@@ -25,6 +25,7 @@ public class Rewrite {
     public Rewrite(String reContent, String reWriter, String memberId) {
         this.reContent = reContent;
         this.reWriter = reWriter;
+        this.memberId = memberId;
     }
 
     
