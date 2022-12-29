@@ -39,7 +39,7 @@ public class JdbcBoardRepository implements BoardRepository {
 
     @Override
     public void delete(Long boardNum) {
-        String sql = "delete * from board where boardNum=:boardNum";
+        String sql = "delete from board where boardNum=:boardNum";
         Map<String, Object> param = Map.of("boardNum", boardNum);
         template.update(sql, param);
 
