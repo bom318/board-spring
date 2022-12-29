@@ -1,5 +1,7 @@
 package bom.basicboard.repository.jdbcTemplate;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +64,9 @@ public class JdbcBoardRepository implements BoardRepository {
 
     @Override
     public void deleteRe(Long boardNum, Long reId) {
-        // TODO Auto-generated method stub
+        String sql = "delete from rewrite where reId=:reId";
+        Map<String, Object> param = Map.of("reId", reId);
+        template.update(sql, param);
 
     }
 
@@ -130,8 +134,8 @@ public class JdbcBoardRepository implements BoardRepository {
 
         // 파일
         List<File> files = getFiles(boardNum);
-        log.info("files size={}",String.valueOf(files.size()));
-        if (files.size()>0) {
+        log.info("files size={}", String.valueOf(files.size()));
+        if (files.size() > 0) {
 
             HashMap<Long, File> fileMap = new HashMap<>();
             for (File file : files) {
@@ -141,7 +145,17 @@ public class JdbcBoardRepository implements BoardRepository {
             board.setFiles(fileMap);
         }
 
-        
+        // 댓글
+        List<Rewrite> reples = getRe(boardNum);
+        if (reples.size() > 0) {
+            HashMap<Long, Rewrite> reMap = new HashMap<>();
+            for (Rewrite repl : reples) {
+                reMap.put(repl.getReId(), repl);
+            }
+            board.setReples(reMap);
+            ;
+        }
+
         return board;
     }
 
@@ -149,7 +163,7 @@ public class JdbcBoardRepository implements BoardRepository {
     public HashMap<Long, File> saveFiles(Long boardNum, List<MultipartFile> multipartFiles) {
         HashMap<Long, File> files = new HashMap<>();
         List<File> saveFiles = fileStore.saveFiles(boardNum, multipartFiles);
-        if(saveFiles == null) {
+        if (saveFiles == null) {
             return null;
         }
         String sql = "insert into file (boardNum, uploadFileName, storeFileName) values (:boardNum, :uploadFileName, :storeFileName)";
@@ -195,8 +209,29 @@ public class JdbcBoardRepository implements BoardRepository {
 
     @Override
     public Board writeRe(Long boardNum, Rewrite rewrite) {
-        // TODO Auto-generated method stub
-        return null;
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        rewrite.setBoardNum(boardNum);
+        rewrite.setReDate(dateFormat.format(date));
+
+        String sql = "insert into rewrite (memberId, reContent, reWriter, reDate, boardNum) values (:memberId, :reContent, :reWriter, :reDate, :boardNum)";
+        SqlParameterSource param = new BeanPropertySqlParameterSource(rewrite);
+        template.update(sql, param);
+
+        return findOne(boardNum);
+
+    }
+
+    public List<Rewrite> getRe(Long boardNum) {
+        String sql = "select * from rewrite where boardNum=:boardNum";
+        Map<String, Object> param = Map.of("boardNum", boardNum);
+        List<Rewrite> reples = template.query(sql, param, replRowMapper());
+        return reples;
+    }
+
+    private RowMapper<Rewrite> replRowMapper() {
+        return BeanPropertyRowMapper.newInstance(Rewrite.class);
     }
 
     private RowMapper<Board> boardRowMapper() {

@@ -43,7 +43,6 @@ public class BoardService {
     }
 
     public List<Board> deleteBoard(Long boardNum, BoardSearchCond searchCond) {
-        boardRepository.deleteFile(boardNum);
         boardRepository.delete(boardNum);
         return boardRepository.findAll(searchCond).get();
     }
