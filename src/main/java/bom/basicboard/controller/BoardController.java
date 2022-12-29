@@ -50,7 +50,8 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/board")
-    public String board(@SessionAttribute(name = "loginMember", required = false) Member loginMember,@ModelAttribute BoardSearchCond searchCond, Model model) {
+    public String board(@SessionAttribute(name = "loginMember", required = false) Member loginMember,
+            @ModelAttribute BoardSearchCond searchCond, Model model) {
         if (loginMember == null) {
             return "login";
         }
@@ -60,10 +61,8 @@ public class BoardController {
         Member member = new Member(memberId, password, memberName);
         model.addAttribute("member", member);
 
-
         List<Board> boardList = boardService.getBoardList(searchCond);
         model.addAttribute("boardList", boardList);
-        
 
         return "board";
     }
@@ -81,16 +80,19 @@ public class BoardController {
     }
 
     @PostMapping("/write")
-    public String write(@SessionAttribute(name = "loginMember", required = false) Member loginMember, @ModelAttribute BoardForm form, RedirectAttributes redirectAttributes) {
-        HashMap<Long, File> files = boardService.saveFile(form.getBoardNum(), form.getFiles());
+    public String write(@SessionAttribute(name = "loginMember", required = false) Member loginMember,
+            @ModelAttribute BoardForm form, RedirectAttributes redirectAttributes) {
+
         Board newBoard = new Board();
         newBoard.setMemberId(loginMember.getMemberId());
         newBoard.setBoardTitle(form.getBoardTitle());
         newBoard.setContent(form.getContent());
         newBoard.setBoardDate(form.getDate());
         newBoard.setWriter(form.getWriter());
-        newBoard.setFiles(files);
         Board saveBoard = boardService.saveBoard(newBoard);
+        
+        HashMap<Long, File> files = boardService.saveFile(saveBoard.getBoardNum(), form.getFiles());
+        newBoard.setFiles(files);
 
         redirectAttributes.addAttribute("boardNum", saveBoard.getBoardNum());
 
@@ -153,7 +155,7 @@ public class BoardController {
     @GetMapping("/delete/{boardNum}")
     public String delete(@PathVariable Long boardNum, @ModelAttribute BoardSearchCond searchCond) {
 
-        boardService.deleteBoard(boardNum,searchCond);
+        boardService.deleteBoard(boardNum, searchCond);
         return "redirect:/board";
     }
 
@@ -168,23 +170,22 @@ public class BoardController {
     @PostMapping("/boardDetail/{boardNum}/saveRepl")
     @ResponseBody
     public Rewrite saveRepl(@PathVariable Long boardNum, @RequestParam(name = "reContent") String reContent,
-    @SessionAttribute(name = "loginMember", required = false) Member loginMember) {
+            @SessionAttribute(name = "loginMember", required = false) Member loginMember) {
 
-        
-        Rewrite repl = new Rewrite(reContent,loginMember.getMemberName(),loginMember.getMemberId());
+        Rewrite repl = new Rewrite(reContent, loginMember.getMemberName(), loginMember.getMemberId());
         boardService.saveRe(boardNum, repl);
 
-        //redirectAttributes.addAttribute("boardNum", boardNum);
+        // redirectAttributes.addAttribute("boardNum", boardNum);
 
-        
         return repl;
     }
 
     @PostMapping("/boardDetail/{boardNum}/deleteRe/{reId}")
-    public String deleteRe(@PathVariable Long boardNum, @PathVariable Long reId, RedirectAttributes redirectAttributes ) {
+    public String deleteRe(@PathVariable Long boardNum, @PathVariable Long reId,
+            RedirectAttributes redirectAttributes) {
         boardService.deleteRe(reId, boardNum);
 
-        redirectAttributes.addAttribute("boardNum",boardNum);
+        redirectAttributes.addAttribute("boardNum", boardNum);
 
         return "redirect:/boardDetail/{boardNum}";
     }

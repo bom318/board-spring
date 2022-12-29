@@ -17,6 +17,10 @@ public class File {
     private String uploadFileName;
     @NotBlank
     private String storeFileName;
+    
+    public File() {
+    }
+
     public File(@NotBlank Long boardNum, @NotBlank String uploadFileName, @NotBlank String storeFileName) {
         this.boardNum = boardNum;
         this.uploadFileName = uploadFileName;

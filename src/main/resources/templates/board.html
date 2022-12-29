@@ -43,8 +43,8 @@
         <div class="board board-items" th:each="board: ${boardList}">
             <span class="boardNum board_span" th:text="${board.boardNum}">1</span>
             <span class="boardTitle board_span"><a th:href="|/boardDetail/${board.boardNum}|" th:text="${board.boardTitle}">안녕하세요</a>
-                <span class="boardRenum" th:if="${board.reples != null && board.reples.size() > 0}" th:text="${board.reples.size()}">2</span> Memory 사용시
-                <!-- <span class="boardRenum" th:if="${board.reNum > 0}" th:text="${board.reNum}">2</span> -->
+                <!-- <span class="boardRenum" th:if="${board.reples != null && board.reples.size() > 0}" th:text="${board.reples.size()}">2</span> Memory 사용시 -->
+                <span class="boardRenum" th:if="${board.reNum > 0}" th:text="${board.reNum}">2</span>
             </span>
             <span class="boardWriter board_span" th:text="${board.writer}">보미</span>
             <span class="boardDate board_span" th:text="${board.boardDate}">2022.12.11</span>

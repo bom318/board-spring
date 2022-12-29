@@ -30,7 +30,7 @@ import bom.basicboard.repository.FileStore;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@Repository
+//@Repository
 @Slf4j
 public class MemoryBoardRepository implements BoardRepository {
 
