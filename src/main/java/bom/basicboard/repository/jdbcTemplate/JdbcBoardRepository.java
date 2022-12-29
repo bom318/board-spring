@@ -26,7 +26,7 @@ import bom.basicboard.domain.File;
 import bom.basicboard.domain.Rewrite;
 import bom.basicboard.repository.BoardRepository;
 
-@Repository
+//@Repository
 public class JdbcBoardRepository implements BoardRepository {
 
     private final NamedParameterJdbcTemplate template;

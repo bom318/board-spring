@@ -10,12 +10,13 @@ import org.junit.jupiter.api.Test;
 import bom.basicboard.domain.Board;
 import bom.basicboard.domain.BoardSearchCond;
 import bom.basicboard.domain.Rewrite;
+import bom.basicboard.repository.FileStore;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class MemoryBoardRepositoryTest {
 
-    MemoryBoardRepository boardRepository = new MemoryBoardRepository();
+    MemoryBoardRepository boardRepository = new MemoryBoardRepository(new FileStore());
 
     @AfterEach
     void clear() {
