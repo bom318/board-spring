@@ -87,7 +87,7 @@ public class BoardController {
         newBoard.setMemberId(loginMember.getMemberId());
         newBoard.setBoardTitle(form.getBoardTitle());
         newBoard.setContent(form.getContent());
-        newBoard.setDate(form.getDate());
+        newBoard.setBoardDate(form.getDate());
         newBoard.setWriter(form.getWriter());
         newBoard.setFiles(files);
         Board saveBoard = boardService.saveBoard(newBoard);
@@ -141,7 +141,7 @@ public class BoardController {
         Board newBoard = new Board();
         newBoard.setBoardTitle(board.getBoardTitle());
         newBoard.setContent(board.getContent());
-        newBoard.setDate(board.getDate());
+        newBoard.setBoardDate(board.getDate());
         newBoard.setWriter(board.getWriter());
         newBoard.setFiles(files);
         boardService.updateBoard(boardNum, newBoard);

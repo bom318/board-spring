@@ -24,9 +24,11 @@ public class Board {
     @NotBlank
     private String writer;
     @NotBlank
-    private String date;
+    private String boardDate;
     @NotBlank
     private String content;
+
+    private int reNum;
 
     private HashMap<Long, Rewrite> reples;
     private HashMap<Long, File> files;

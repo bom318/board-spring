@@ -27,7 +27,7 @@ import bom.basicboard.domain.Rewrite;
 import bom.basicboard.repository.BoardRepository;
 import lombok.extern.slf4j.Slf4j;
 
-@Repository
+//@Repository
 @Slf4j
 public class MemoryBoardRepository implements BoardRepository {
 
@@ -93,7 +93,7 @@ public class MemoryBoardRepository implements BoardRepository {
         Board findBoard = findOne(boardNum);
 
         board.setBoardNum(boardNum);
-        board.setDate(findBoard.getDate());
+        board.setBoardDate(findBoard.getBoardDate());
         board.setReples(findBoard.getReples());
 
         boardStore.replace(boardNum, board);
