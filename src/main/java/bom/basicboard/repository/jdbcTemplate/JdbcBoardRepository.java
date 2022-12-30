@@ -32,7 +32,7 @@ import bom.basicboard.repository.BoardRepository;
 import bom.basicboard.repository.FileStore;
 import lombok.extern.slf4j.Slf4j;
 
-@Repository
+//@Repository
 @Slf4j
 public class JdbcBoardRepository implements BoardRepository {
 
@@ -153,7 +153,6 @@ public class JdbcBoardRepository implements BoardRepository {
                 reMap.put(repl.getReId(), repl);
             }
             board.setReples(reMap);
-            ;
         }
 
         return board;

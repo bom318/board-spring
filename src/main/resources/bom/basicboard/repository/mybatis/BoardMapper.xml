@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bom.basicboard.repository.mybatis.BoardMapper">
+    <select id="findAll" resultType="board">
+        select * from board
+        <where>
+            <if test="filter == 'title' and word != null and word != ''">
+                and boardTitle like concat ('%',#{word},'%')
+            </if>
+            <if test="filter == 'name' and word != null and word != ''">
+                and writer=#{word}
+            </if>
+        </where>
+    </select>
+    <select id="findOne" resultType="board">
+        select * from board
+        where boardNum=#{boardNum}
+    </select>
+    <insert id="write" useGeneratedKeys="true" keyProperty="boardNum">
+        insert into board (boardTitle,memberId,writer,boardDate,content)
+        values (#{boardTitle},#{memberId},#{writer},#{boardDate},#{content})
+    </insert>
+    <update id="update">
+        update board
+        set boardTitle=#{board.boardTitle}, content=#{board.content}
+        where boardNum=#{boardNum}
+    </update>
+    <update id="delete">
+        delete from board
+        where boardNum=#{boardNum}
+    </update>
+    <!-- 댓글 -->
+    <update id="writeRe" useGeneratedKeys="true" keyProperty="rewrite.reId">
+        insert into rewrite (memberId,reContent,reWriter,reDate,boardNum)
+        values (#{rewrite.memberId},#{rewrite.reContent},#{rewrite.reWriter},#{rewrite.reDate},#{boardNum})
+    </update>
+    <update id="deleteRe">
+        delete from rewrite
+        where reId=#{reId}
+    </update>
+    <select id="getReNum" resultType="int">
+        select count(*) from rewrite
+        where boardNum=#{boardNum}
+    </select>
+    <select id="getRe" resultType="rewrite">
+        select * from rewrite
+        where boardNum=#{boardNum}
+    </select>
+    <!-- 파일 -->
+    <select id="getFiles" resultType="file">
+        select * from file
+        where boardNum=#{boardNum}
+    </select>
+    <update id="saveFiles" useGeneratedKeys="true" keyProperty="saveFile.fileId">
+        insert into file (uploadFileName,storeFileName,boardNum)
+        values (#{saveFile.uploadFileName},#{saveFile.storeFileName},#{boardNum})
+    </update>
+    <select id="findFile" resultType="file">
+        select * from file
+        where fileId=#{fileId}
+    </select>
+    <update id="deleteFile">
+        delete from file
+        where boardNum=#{boardNum}
+    </update>
+</mapper>
