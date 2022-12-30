@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bom.basicboard.repository.mybatis.MemberMapper">
+    <insert id="save" useGeneratedKeys="true" keyProperty="uuid">
+        insert into member (member_id,PASSWORD,member_name)
+        values (#{memberId},#{password},#{memberName})
+    </insert>
+    <update id="update">
+        update member
+        set PASSWORD=#{PASSWORD}, member_name=#{memberName}
+        where UUID=#{UUID}
+    </update>
+    <select id="findById" resultType="member">
+        select * from member
+        where UUID=#{uuid}
+    </select>
+    <select id="findAll" resultType="member">
+        select * from member
+    </select>
+    <select id="findByMemberId" resultType="member">
+        select * from member
+        where member_id=#{memberId}
+    </select>
+    <update id="delete">
+        delete member
+        where UUID=#{uuid}
+    </update>
+</mapper>

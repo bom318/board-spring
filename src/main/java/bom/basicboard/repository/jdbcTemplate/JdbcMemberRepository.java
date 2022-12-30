@@ -20,7 +20,7 @@ import bom.basicboard.domain.Member;
 import bom.basicboard.repository.MemberRepository;
 import lombok.AllArgsConstructor;
 
-@Repository
+//@Repository
 public class JdbcMemberRepository implements MemberRepository {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
