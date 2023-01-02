@@ -1,7 +1,9 @@
-package bom.basicboard.repository.mybatis;
+package bom.basicboard.repository.jpa;
 
 import java.util.List;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
@@ -9,43 +11,45 @@ import bom.basicboard.domain.Member;
 import bom.basicboard.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 
-//@Repository
+@Repository
+@Transactional
 @RequiredArgsConstructor
-public class MyBatisMemberRepository implements MemberRepository {
-    private final MemberMapper mapper;
+public class JpaMemberRepositoryAdap implements MemberRepository{
+
+    private final JpaMemberRepository repository;
 
     @Override
     public void delete(Long uuid) {
-        mapper.delete(uuid);
+        repository.deleteById(uuid);
         
     }
 
     @Override
     public List<Member> findAll() {
-        return mapper.findAll();
+        return repository.findAll();
     }
 
     @Override
     public Optional<Member> findById(Long uuid) {
-        return mapper.findById(uuid);
+        return repository.findById(uuid);
     }
 
     @Override
     public Optional<Member> findByMemberId(String memberId) {
-        return mapper.findByMemberId(memberId);
+        return repository.findByMemberId(memberId);
     }
 
     @Override
     public Member save(Member member) {
-        mapper.save(member);
-        return member;
+        return repository.save(member);
     }
 
     @Override
     public Member update(Long uuid, String password, String memberName) {
-        mapper.update(uuid, password, memberName);
-        return mapper.findById(uuid).get();
+        Member findMember = findById(uuid).get();
+        findMember.setMemberName(memberName);
+        findMember.setPassword(password);
+        return findMember;
     }
-
     
 }
